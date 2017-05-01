@@ -126,7 +126,7 @@ def interpret(command, whitelist=None, blacklist=None, substitutions=None):
     :rtype: int
     """
 
-    whitelist, blacklist, substitutons = _parse_subdirectives(
+    whitelist, blacklist, substitutions = _parse_subdirectives(
         whitelist, blacklist, substitutions
     )
 
