@@ -71,6 +71,14 @@ def _parse_subdirectives(whitelist, blacklist, substitutions):
 
 
 def parse_directive(directive):
+    """
+    Parse a directive into a whitelist, blacklist, and substitution map.
+
+    :param str directive: Directive to parse
+    :return: whitelist, blacklist, substitutions
+    :rype: tuple[list, list, dict]
+    """
+
     whitelist = []
     blacklist = []
     substitutions = {}
@@ -103,6 +111,21 @@ def parse_directive(directive):
 
 
 def interpret(command, whitelist=None, blacklist=None, substitutions=None):
+    """
+    Run a command and interpret its return code.
+
+    :param command: Command to execute and interpret its return code
+    :type command: list or str
+    :param whitelist: Return codes to convert to 0
+    :type whitelist: list or int or None
+    :param blacklist: Return codes to leave alone (whitelist others)
+    :type blacklist: list or int or None
+    :param substitutions: Return codes to map to a specific code
+    :type substitutions: dict or None
+    :return: Interpreted return code
+    :rtype: int
+    """
+
     whitelist, blacklist, substitutons = _parse_subdirectives(
         whitelist, blacklist, substitutions
     )
