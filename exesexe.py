@@ -110,24 +110,25 @@ def interpret(command, whitelist=None, blacklist=None, substitutions=None):
     code = subprocess.call(command)
 
     if whitelist and code in whitelist:
-        sys.exit(0)
+        return 0
     elif substitutions and code in substitutions:
-        sys.exit(substitutions[code])
+        return substitutions[code]
     elif blacklist:
         if code in blacklist:
-            sys.exit(code)
+            return code
         elif substitutions and "*" in substitutions:
-            sys.exit(substitutions["*"])
+            return substitutions["*"]
         else:
-            sys.exit(0)
+            return 0
     else:
-        sys.exit(substitutions.get("*", code))
+        return substitutions.get("*", code)
 
 
 def main():
     directive, command = _parse_args()
     whitelist, blacklist, substitutions = parse_directive(directive)
-    interpret(command, whitelist, blacklist, substitutions)
+    code = interpret(command, whitelist, blacklist, substitutions)
+    sys.exit(code)
 
 
 if __name__ == "__main__":

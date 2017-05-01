@@ -120,6 +120,5 @@ def test_parse_directive(directive, whitelist, blacklist, substitutions):
 )
 def test_interpret(whitelist, blacklist, substitutions, call_code, exit_code):
     with mock.patch("exesexe.subprocess.call", return_value=call_code):
-        with pytest.raises(SystemExit) as e:
-            exesexe.interpret("example -f", whitelist, blacklist, substitutions)
-            assert e.code == exit_code
+        code = exesexe.interpret("example -f", whitelist, blacklist, substitutions)
+        assert code == exit_code
