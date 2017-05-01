@@ -6,7 +6,7 @@ with open("README.md") as file:
 
 setup(
     name="exesexe",
-    version="1.0.0",
+    version="1.0.1",
     description="Manipulate return codes from executables",
     long_description=long_description,
     url="https://github.com/mtkennerly/exesexe",
