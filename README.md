@@ -1,3 +1,4 @@
+# exesexe
 Inspired by programs that return 1 on success, exesexe lets you wrap a call
 to an executable and selectively override its return codes. This allows you,
 for example, to use an aberrant installer with configuration management

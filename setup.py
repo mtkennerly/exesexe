@@ -25,13 +25,6 @@ setup(
     ],
     keywords="return code",
     py_modules=["exesexe"],
-    extras_require={
-        "dev": [
-            "invoke",
-            "pyinstaller",
-            "tox"
-        ]
-    },
     entry_points={
         "console_scripts": [
             "exesexe=exesexe:main",
