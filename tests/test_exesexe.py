@@ -1,7 +1,4 @@
-try:
-    from unittest import mock
-except ImportError:
-    import mock
+from unittest import mock
 
 import pytest
 
@@ -13,8 +10,8 @@ import exesexe
     [
         ("exesexe", "1", "foo"),
         ("exesexe", "1,!2,3=4", "foo", "-a", "-b"),
-        ("exesexe", "5", "foo", "-h")
-    ]
+        ("exesexe", "5", "foo", "-h"),
+    ],
 )
 def test__parse_args(argv):
     directive, command = exesexe._parse_args(argv)
@@ -30,7 +27,7 @@ def test__parse_args(argv):
         (["exesexe", "-h", "1=0", "foo"], 0),
         (["exesexe"], 1),
         (["exesexe", 2], 1),
-    ]
+    ],
 )
 def test__parse_args_help(argv, code):
     with pytest.raises(SystemExit) as e:
@@ -44,8 +41,8 @@ def test__parse_args_help(argv, code):
         (1, None, None, [1], [], {}),
         (None, 2, {}, [], [2], {}),
         ([], [], {1: 2}, [], [], {1: 2}),
-        (0, 0, {0: 0}, [0], [0], {0: 0})
-    ]
+        (0, 0, {0: 0}, [0], [0], {0: 0}),
+    ],
 )
 def test__parse_subdirectives(wl_in, bl_in, sub_in, wl_out, bl_out, sub_out):
     wl, bl, sub = exesexe._parse_subdirectives(wl_in, bl_in, sub_in)
@@ -59,7 +56,7 @@ def test__parse_subdirectives(wl_in, bl_in, sub_in, wl_out, bl_out, sub_out):
     [
         (None, None, None),
         ([], [], {}),
-    ]
+    ],
 )
 def test__parse_subdirectives_without_crtieria(wl_in, bl_in, sub_in):
     with pytest.raises(ValueError):
@@ -80,8 +77,8 @@ def test__parse_subdirectives_without_crtieria(wl_in, bl_in, sub_in):
         ("!1:3", [], [1, 2, 3], {}),
         ("1:3=4", [], [], {1: 4, 2: 4, 3: 4}),
         ("1:2,!3:4,5:6=7,*=9", [1, 2], [3, 4], {5: 7, 6: 7, "*": 9}),
-        ("!1=2", [], [1], {"*": 2})
-    ]
+        ("!1=2", [], [1], {"*": 2}),
+    ],
 )
 def test_parse_directive(directive, whitelist, blacklist, substitutions):
     wl, bl, sub = exesexe.parse_directive(directive)
@@ -115,8 +112,8 @@ def test_parse_directive(directive, whitelist, blacklist, substitutions):
         ([1, 2], [3, 4], {2: 6}, 2, 0),  # all fields, whitelist > n-sub > blacklist
         ([1, 2], [3, 5], {5: 6}, 5, 6),  # all fields, n-sub > blacklist
         ([1], [2], {3: 4, "*": 5}, 2, 2),  # all fields, blacklist-present > *-sub
-        ([1], [2], {3: 4, "*": 5}, 9, 5)  # all fields, *-sub > blacklist-absent
-    ]
+        ([1], [2], {3: 4, "*": 5}, 9, 5),  # all fields, *-sub > blacklist-absent
+    ],
 )
 def test_interpret(whitelist, blacklist, substitutions, call_code, exit_code):
     with mock.patch("exesexe.subprocess.call", return_value=call_code):

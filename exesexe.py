@@ -1,7 +1,4 @@
-__all__ = [
-    "interpret",
-    "parse_directive"
-]
+__all__ = ["interpret", "parse_directive"]
 
 import subprocess
 import sys
@@ -126,9 +123,7 @@ def interpret(command, whitelist=None, blacklist=None, substitutions=None):
     :rtype: int
     """
 
-    whitelist, blacklist, substitutions = _parse_subdirectives(
-        whitelist, blacklist, substitutions
-    )
+    whitelist, blacklist, substitutions = _parse_subdirectives(whitelist, blacklist, substitutions)
 
     code = subprocess.call(command)
 
